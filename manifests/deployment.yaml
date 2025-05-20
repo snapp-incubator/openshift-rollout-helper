@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rollout-helper
+  namespace: snappcloud-tools
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rollout-helper
+  template:
+    metadata:
+      labels:
+        app: rollout-helper
+    spec:
+      serviceAccountName: rollout-helper
+      containers:
+      - name: rollout-helper
+        image: rollout-helper:latest
+        args:
+        - --alertmanager-url=http://alertmanager-main.openshift-monitoring.svc:9093
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10 
