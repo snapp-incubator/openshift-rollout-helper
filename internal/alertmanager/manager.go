@@ -168,6 +168,7 @@ func (m *SilenceManager) CreateInstanceSilence(ctx context.Context, nodeName str
 	// Define services that need to be silenced
 	alertServices := []string{
 		"node-exporter",
+		"kubernetes-cadvisor",
 		"kubelet",
 	}
 
@@ -214,7 +215,7 @@ func (m *SilenceManager) CreateNodeSilence(ctx context.Context, nodeName string)
 
 	// Define services that need to be silenced
 	alertServices := []string{
-		"snappcloud-network-vector/spcld-network-vector-agent",
+		"snappcloud-network-vector\\/spcld-network-vector-agent",
 		"event-exporter",
 		"node-exporter",
 		"kube-state-metrics",
