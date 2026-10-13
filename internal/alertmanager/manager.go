@@ -193,7 +193,7 @@ func (m *SilenceManager) CreateInstanceSilence(ctx context.Context, nodeName str
 		},
 	}
 	if err := m.amClient.CreateSilence(ctx, matchers, nodeName); err != nil {
-		klog.Errorf("failed to create silence for instance %s: %w", nodeName, err)
+		klog.Errorf("failed to create silence for instance %s: %v", nodeName, err)
 	}
 	return nil
 }
@@ -245,7 +245,7 @@ func (m *SilenceManager) CreateNodeSilence(ctx context.Context, nodeName string)
 		},
 	}
 	if err := m.amClient.CreateSilence(ctx, matchers, nodeName); err != nil {
-		klog.Errorf("failed to create silence for node %s: %w", nodeName, err)
+		klog.Errorf("failed to create silence for node %s: %v", nodeName, err)
 	}
 	return nil
 }

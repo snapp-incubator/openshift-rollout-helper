@@ -1,9 +1,9 @@
-FROM golang:1.21-alpine AS builder
+FROM golang:1.27.2-alpine AS builder
 
 WORKDIR /app
 
 # Copy go mod and sum files
-COPY go.mod ./
+COPY go.mod go.sum ./
 
 # Download dependencies
 RUN go mod download
@@ -15,7 +15,7 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -o rollout-helper
 
 # Use a minimal alpine image for the final container
-FROM alpine:3.19
+FROM alpine:3.24
 
 WORKDIR /app
 
